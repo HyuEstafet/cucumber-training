@@ -11,6 +11,12 @@ Feature: Calculations of sums for different data types
       When expected input result is 8
       Then we check the result is correct
 
+    @AddingNegativeIntegers
+      Scenario:  Adding negative Integers
+      Given we add int numbers -3 and -5
+      When expected input result is -8
+      Then we check the result is correct
+
   Rule: The numbers are Decimal
     @AddingPositiveDecimals
     Scenario: Adding positive Decimals
