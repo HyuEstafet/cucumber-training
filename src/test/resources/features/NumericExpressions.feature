@@ -24,4 +24,10 @@ Feature: Calculations of sums for different data types
       When expected decimal input result is 4.2
       Then we check the decimal result is correct
 
+    @AddingNegativeDecimals
+    Scenario: Adding negative Decimals
+      Given we add decimal numbers -1.2 and -3.0
+      When expected decimal input result is -4.2
+      Then we check the decimal result is correct
+
 
