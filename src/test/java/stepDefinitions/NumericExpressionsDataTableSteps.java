@@ -10,14 +10,12 @@ import java.util.List;
 
 public class NumericExpressionsDataTableSteps {
 
-    private ArrayList<Integer> listOfNumbers;
-    private ArrayList <Integer> calculatedResult;
     private List<Integer> positiveNumbers = new ArrayList<>();
     private List<Integer> negativeNumbers = new ArrayList<>();
-    int sumOfPositives;
-    int sumOfNegatives;
-    int differenceOfPositives;
-    int differenceOfNegatives;
+
+    int calculationOfPositives = 0;
+    int calculationOfNegatives = 0;
+    String calculationType = "";
 
     @ParameterType("sum|difference")
     public String operation(String operation) {
@@ -26,11 +24,11 @@ public class NumericExpressionsDataTableSteps {
 
     @Given("we have the following numbers:")
     public void weHaveTheFollowingNumbers(List<List<Integer>> rows) {
+        rows.forEach(column -> {
+            positiveNumbers.add(column.get(0)); // positive numbers (3, 2)
+            negativeNumbers.add(column.get(1)); // negative numbers (-1, -5)
+        });
 
-        positiveNumbers.add(rows.get(0).get(0));
-        positiveNumbers.add(rows.get(1).get(0));
-        negativeNumbers.add(rows.get(0).get(1));
-        negativeNumbers.add(rows.get(1).get(1));
 
         System.out.println("Positive Numbers: " + positiveNumbers);
         System.out.println("Negative Numbers: " + negativeNumbers);
@@ -38,27 +36,35 @@ public class NumericExpressionsDataTableSteps {
 
     @When("we use operator {operation}")
     public void weUseOperatorSumOrDifference(String operation) {
+
+        calculationType = operation;
+        System.out.println("Setting calculation type to: " + calculationType);
+
         if (operation.equals("sum")) {
-            sumOfPositives=positiveNumbers.get(0) + positiveNumbers.get(1);
-            sumOfNegatives=negativeNumbers.get(0) + negativeNumbers.get(1);
-            System.out.println("Sum of positives: " + sumOfPositives+"\n"+"Sum of negatives: "+sumOfNegatives);
-        } else if (operation.equals("difference")) {
-            differenceOfPositives=positiveNumbers.get(0)-positiveNumbers.get(1);
-            differenceOfNegatives=negativeNumbers.get(0)-negativeNumbers.get(1);
-            System.out.println("Difference of positives: " +differenceOfPositives+"\n"+"Difference of negatives: "+differenceOfNegatives);
+            for (int n : positiveNumbers) {
+                calculationOfPositives = calculationOfPositives + n;
+            }
+            negativeNumbers.forEach(number -> {
+                calculationOfNegatives = calculationOfNegatives + number;
+            });
         } else {
-            System.out.println("Invalid operation!");
+            for (int n : positiveNumbers) {
+                calculationOfPositives = calculationOfPositives - n;
+            }
+            for (int n : negativeNumbers) {
+                calculationOfNegatives = calculationOfNegatives - n;
+            }
         }
+        System.out.println("Positives calculations: " + calculationOfPositives);
+        System.out.println("Negatives calculations: " + calculationOfNegatives);
     }
+
+
     @Then("we print the results and compare")
     public void wePrintTheResults() {
-
-        System.out.println(sumOfPositives==sumOfNegatives ?
-                "Sum of positives and negatives is equal" : (sumOfPositives>sumOfNegatives ?
-                "Sum of positives is greater: " +sumOfPositives : "Sum of negatives is greater: " + sumOfNegatives));
-        System.out.println(differenceOfPositives==differenceOfNegatives ?
-                "Difference of positives and negatives is equal" : (differenceOfPositives>differenceOfNegatives ?
-                "Difference of positives is greater: " +differenceOfPositives : "Difference of negatives is greater: " + differenceOfNegatives));
+        System.out.println(
+                calculationOfPositives == calculationOfNegatives ? "Calculations are equal!" :
+                        (calculationOfPositives > calculationOfNegatives ? "Calculation of positives is greater: " + calculationOfPositives :
+                                "Calculations of negatives is greater: " + calculationOfNegatives));
     }
-
 }
