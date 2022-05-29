@@ -8,10 +8,12 @@ import org.junit.Assert;
 
 public class StringExpressionsSteps {
 
+    StringHelper stringHelper;
     private String inputWord;
     private boolean isCaseSensitive;
     private String firstSentence;
     private String secondSentence;
+    private String inputText;
 
     @Given("user inputs the word {string}")
     public void user_inputs_the_word(String inputString) {
@@ -59,4 +61,13 @@ public class StringExpressionsSteps {
         Assert.assertEquals("The sentences are not equal!",firstSentence,secondSentence);
     }
 
+    @Given("the input is a paragraph of text")
+    public void the_input_is_a_paragraph_of_text(String docString) {
+        inputText = docString;
+    }
+
+    @Then("^print the (Word Count)$")
+    public void printTheWordsCount(String string) {
+        System.out.println(stringHelper.countWords(inputText)); //NullPointerException ?
+    }
 }

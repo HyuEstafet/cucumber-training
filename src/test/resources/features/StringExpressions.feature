@@ -11,7 +11,7 @@ Feature: Comparing words, sentences and counting words.
 #      And the letter "t" is removed
       Then verify the result is "example"
 
-  Rule: Remove punctuation symbols from the input sentence and then validate
+  Rule: Remove punctuation symbols from the input sentences and compare the sentences
     @CompareSentences
     Scenario: Compare sentences
       Given _First sentence is set to: "My sentence!!?"
@@ -21,5 +21,14 @@ Feature: Comparing words, sentences and counting words.
       When all occurrences of symbol ")" is removed
       And case sensitivity is set
       Then check the equality of _First sentence and _Second sentence
+
+  Rule:
+   @CountWords
+   Scenario: Count words
+     Given the input is a paragraph of text
+     """
+     This is my example text that I will use for counting the words in this task
+     """
+     Then print the Word Count
 
 
