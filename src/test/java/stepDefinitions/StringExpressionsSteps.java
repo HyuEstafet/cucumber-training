@@ -15,18 +15,18 @@ public class StringExpressionsSteps {
     private String secondSentence;
     private String inputText;
 
-    @Given("user inputs the word {string}")
+    @Given("user inputs the word {word}")
     public void user_inputs_the_word(String inputString) {
         inputWord = inputString;
     }
 
-    @When("the letter {string} is removed")
+    @When("the letter(s) {word} is removed")
     public void the_letter_is_removed(String letter) {
 
         inputWord = inputWord.replace(letter, "");
     }
 
-    @Then("verify the result is {string}")
+    @Then("verify the result is {word}")
     public void the_result_is(String finalResult) {
 
         System.out.println("Updated word: " + inputWord);
@@ -52,10 +52,7 @@ public class StringExpressionsSteps {
         secondSentence = secondSentence.replace(symbol,"");
         System.out.println("Updated second sentence: " +secondSentence);
     }
-    @When("case sensitivity is set")
-    public void case_sensitivity_is_set() {
 
-    }
     @Then("check the equality of _First sentence and _Second sentence")
     public void check_the_equality_of__first_sentence_and__second_sentence() {
         Assert.assertEquals("The sentences are not equal!",firstSentence,secondSentence);
@@ -66,8 +63,12 @@ public class StringExpressionsSteps {
         inputText = docString;
     }
 
-    @Then("^print the (Word Count)$")
+    @Then("print the Word Count")
     public void printTheWordsCount(String string) {
         System.out.println(stringHelper.countWords(inputText)); //NullPointerException ?
+    }
+
+    @Given("case sensitivity is set")
+    public void caseSensitivityIsSet() { isCaseSensitive = true;
     }
 }
