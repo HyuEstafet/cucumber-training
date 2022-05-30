@@ -2,7 +2,7 @@
 Feature: Comparing words, sentences and counting words.
 
   Background:
-    * case sensitivity is set
+    * case "sensitivity" check is set
 
   Rule: Remove certain characters from the input word and then validate
     @CompareWords

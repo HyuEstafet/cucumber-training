@@ -68,7 +68,9 @@ public class StringExpressionsSteps {
         System.out.println(stringHelper.countWords(inputText)); //NullPointerException ?
     }
 
-    @Given("case sensitivity is set")
-    public void caseSensitivityIsSet() { isCaseSensitive = true;
+    @Given("case {string} check is set")
+    public void caseSensitivityIsSet(String wordSensitivity) {
+
     }
+
 }
