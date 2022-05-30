@@ -1,10 +1,12 @@
 package stepDefinitions;
 
 import helpers.StringHelper;
+import io.cucumber.java.ParameterType;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 
 public class StringExpressionsSteps {
 
@@ -14,6 +16,11 @@ public class StringExpressionsSteps {
     private String firstSentence;
     private String secondSentence;
     private String inputText;
+
+    @ParameterType("true|false")
+    public Boolean bool(boolean bool) {
+        return bool;
+    }
 
     @Given("user inputs the word {word}")
     public void user_inputs_the_word(String inputString) {
@@ -30,6 +37,7 @@ public class StringExpressionsSteps {
     public void the_result_is(String finalResult) {
 
         System.out.println("Updated word: " + inputWord);
+//        Assertions.assertTrue(StringHelper.compareWords(inputWord,finalResult,isCaseSensitive),"Test failed!");
         Assert.assertTrue(StringHelper.compareWords(inputWord,finalResult,isCaseSensitive));
     }
 
@@ -63,14 +71,14 @@ public class StringExpressionsSteps {
         inputText = docString;
     }
 
-    @Then("print the Word Count")
-    public void printTheWordsCount(String string) {
+    @Then("print the word count")
+    public void printTheWordCount(String string) {
         System.out.println(stringHelper.countWords(inputText)); //NullPointerException ?
     }
 
-    @Given("case {string} check is set")
-    public void caseSensitivityIsSet(String wordSensitivity) {
-
+    @Given("case sensitivity is set to {bool}")
+    public void case_sensitivity_is_set_to(boolean bool) {
+        isCaseSensitive = bool;
     }
 
 }

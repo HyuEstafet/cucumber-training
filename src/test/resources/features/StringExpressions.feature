@@ -2,7 +2,8 @@
 Feature: Comparing words, sentences and counting words.
 
   Background:
-    * case "sensitivity" check is set
+    * case sensitivity is set to true
+    * case sensitivity is set to false
 
   Rule: Remove certain characters from the input word and then validate
     @CompareWords
@@ -29,6 +30,6 @@ Feature: Comparing words, sentences and counting words.
      """
      This is my example text that I will use for counting the words in this task
      """
-     Then print the Word Count
+     Then print the word count
 
 
