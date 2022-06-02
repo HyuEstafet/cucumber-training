@@ -8,7 +8,7 @@ public class StringHelper {
     }
 
     public int countWords (String words) {
-        String[] wordsArray = words.trim().split(" ");
+        String[] wordsArray = words.split(" ");
         return wordsArray.length;
     }
 }

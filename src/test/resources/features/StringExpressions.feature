@@ -2,16 +2,16 @@
 Feature: Comparing words, sentences and counting words.
 
   Background:
-    * case sensitivity is set to true
     * case sensitivity is set to false
 
   Rule: Remove certain characters from the input word and then validate
     @CompareWords
     Scenario: 1. Compare words
-      Given user inputs the word "Examplesssz"
-      When the letter "s" is removed
-      And the letter "z" is removed
-      Then verify the result is "example"
+      Given user inputs the word Examplesssz
+      When the letters sz is removed
+      And the letter s is removed
+      Then verify the result is example
+
 
   Rule: Remove punctuation symbols from the input sentences and compare the sentences
     @CompareSentences
@@ -28,7 +28,7 @@ Feature: Comparing words, sentences and counting words.
    Scenario: 3. Count words
      Given the input is a paragraph of text
      """
-     This is my example text that I will use for counting the words in this task
+     This is my example text that I will use for counting the words in this task and I will print out the the total count
      """
      Then print the word count
 

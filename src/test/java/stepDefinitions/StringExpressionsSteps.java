@@ -5,40 +5,41 @@ import io.cucumber.java.ParameterType;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.junit.Assert;
-import org.junit.jupiter.api.Assertions;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class StringExpressionsSteps {
 
-    StringHelper stringHelper;
+    StringHelper stringHelper = new StringHelper();
     private String inputWord;
     private boolean isCaseSensitive;
     private String firstSentence;
     private String secondSentence;
-    private String inputText;
+    String inputText;
 
-    @ParameterType("true|false")
-    public Boolean bool(boolean bool) {
-        return bool;
+    @ParameterType(value = "true|True|TRUE|false|False|FALSE")
+    public Boolean booleanValue(String value) {
+        return Boolean.valueOf(value);
     }
 
     @Given("user inputs the word {word}")
     public void user_inputs_the_word(String inputString) {
         inputWord = inputString;
+        System.out.println("The input string has been set to: " + inputWord);
     }
 
     @When("the letter(s) {word} is removed")
     public void the_letter_is_removed(String letter) {
-
         inputWord = inputWord.replace(letter, "");
+        System.out.println("The updated string: " + inputWord);
     }
 
     @Then("verify the result is {word}")
     public void the_result_is(String finalResult) {
-
-        System.out.println("Updated word: " + inputWord);
-//        Assertions.assertTrue(StringHelper.compareWords(inputWord,finalResult,isCaseSensitive),"Test failed!");
-        Assert.assertTrue(StringHelper.compareWords(inputWord,finalResult,isCaseSensitive));
+        System.out.println(String.format("Comparing %s with %s", finalResult, inputWord));
+        assertTrue(StringHelper.compareWords(inputWord, finalResult, isCaseSensitive),
+                "Expected string doesn't match the formatted input");
     }
 
     @Given("_First sentence is set to: {string}")
@@ -63,7 +64,7 @@ public class StringExpressionsSteps {
 
     @Then("check the equality of _First sentence and _Second sentence")
     public void check_the_equality_of__first_sentence_and__second_sentence() {
-        Assert.assertEquals("The sentences are not equal!",firstSentence,secondSentence);
+        assertEquals("The sentences are not equal!", firstSentence, secondSentence);
     }
 
     @Given("the input is a paragraph of text")
@@ -72,13 +73,12 @@ public class StringExpressionsSteps {
     }
 
     @Then("print the word count")
-    public void printTheWordCount(String string) {
-        System.out.println(stringHelper.countWords(inputText)); //NullPointerException ?
+    public void printTheWordCount() {
+        System.out.println("The total wordcount is: " + stringHelper.countWords(inputText));
     }
 
-    @Given("case sensitivity is set to {bool}")
-    public void case_sensitivity_is_set_to(boolean bool) {
+    @Given("case sensitivity is set to {booleanValue}")
+    public void case_sensitivity_is_set_to(Boolean bool) {
         isCaseSensitive = bool;
     }
-
 }
