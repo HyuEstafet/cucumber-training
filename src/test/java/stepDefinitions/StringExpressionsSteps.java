@@ -64,7 +64,8 @@ public class StringExpressionsSteps {
 
     @Then("check the equality of _First sentence and _Second sentence")
     public void check_the_equality_of__first_sentence_and__second_sentence() {
-        assertEquals("The sentences are not equal!", firstSentence, secondSentence);
+        System.out.printf("Comparing %s with %s%n", firstSentence, secondSentence);
+        assertTrue(StringHelper.compareWords(firstSentence,secondSentence,isCaseSensitive), "The sentences are not the same!");
     }
 
     @Given("the input is a paragraph of text")
