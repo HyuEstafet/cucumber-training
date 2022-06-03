@@ -46,7 +46,7 @@ public class StringExpressionsSteps {
     public void _first_sentence_is_set_to(String firstInputSentence) {
         firstSentence = firstInputSentence;
     }
-    @When("first occurrence of symbol {string} is removed")
+    @When("^first occurrence of symbol ([.?!:]) is removed$")
     public void first_occurrence_of_symbol_is_removed(String exclamationMark) {
         firstSentence = firstSentence.replaceFirst(exclamationMark,"");
         System.out.println("Updated first sentence: " + firstSentence);
@@ -56,16 +56,17 @@ public class StringExpressionsSteps {
 
         secondSentence = secondInputSentence;
     }
-    @When("all occurrences of symbol {string} is removed")
+    @When("^all occurrences of symbol ([“\\(\\)\\[\\],;\\-']) is removed$") // java.util.regex.PatternSyntaxException: Unclosed group near index 1
     public void all_occurrences_of_symbols_and_are_removed(String symbol) {
-        secondSentence = secondSentence.replace(symbol,"");
-        System.out.println("Updated second sentence: " +secondSentence);
+        firstSentence = firstSentence.replaceAll(symbol, "");
+        System.out.println("Updated second sentence: " + firstSentence);
     }
 
     @Then("check the equality of _First sentence and _Second sentence")
     public void check_the_equality_of__first_sentence_and__second_sentence() {
         System.out.printf("Comparing %s with %s%n", firstSentence, secondSentence);
-        assertTrue(StringHelper.compareWords(firstSentence,secondSentence,isCaseSensitive), "The sentences are not the same!");
+        assertEquals(firstSentence, secondSentence, "The sentences are not the same!");
+//        assertTrue(StringHelper.compareWords(firstSentence,secondSentence,isCaseSensitive), "The sentences are not the same!");
     }
 
     @Given("the input is a paragraph of text")
