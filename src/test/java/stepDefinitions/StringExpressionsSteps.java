@@ -46,9 +46,9 @@ public class StringExpressionsSteps {
     public void _first_sentence_is_set_to(String firstInputSentence) {
         firstSentence = firstInputSentence;
     }
-    @When("^first occurrence of symbol ([.?!:]) is removed$")
-    public void first_occurrence_of_symbol_is_removed(String exclamationMark) {
-        firstSentence = firstSentence.replaceFirst(exclamationMark,"");
+    @When("^first occurrence of symbol ([\\.\\?!:]) is removed$")
+    public void first_occurrence_of_symbol_is_removed(String symbolMark) {
+        firstSentence = firstSentence.replaceFirst(String.format("\\%s",symbolMark),"");
         System.out.println("Updated first sentence: " + firstSentence);
     }
     @Given("_Second sentence is set to: {string}")
@@ -56,9 +56,11 @@ public class StringExpressionsSteps {
 
         secondSentence = secondInputSentence;
     }
-    @When("^all occurrences of symbol ([“\\(\\)\\[\\],;\\-']) is removed$") // java.util.regex.PatternSyntaxException: Unclosed group near index 1
+//    Java    Cucumber    String symbol
+//    \\(     \(          (
+    @When("^all occurrences of symbol ([“\\(\\)\\[\\],;\\-']) is removed$") // java.util.regex.PatternSyntaxException: Unclosed group near  index 1
     public void all_occurrences_of_symbols_and_are_removed(String symbol) {
-        firstSentence = firstSentence.replaceAll("([“\\(\\)\\[\\],;\\-'])", "");
+        firstSentence = firstSentence.replaceAll(String.format("\\%s",symbol), "");
         System.out.println("Updated second sentence: " + firstSentence);
     }
 
