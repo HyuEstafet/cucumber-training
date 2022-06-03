@@ -58,7 +58,7 @@ public class StringExpressionsSteps {
     }
     @When("^all occurrences of symbol ([“\\(\\)\\[\\],;\\-']) is removed$") // java.util.regex.PatternSyntaxException: Unclosed group near index 1
     public void all_occurrences_of_symbols_and_are_removed(String symbol) {
-        firstSentence = firstSentence.replaceAll(symbol, "");
+        firstSentence = firstSentence.replaceAll("([“\\(\\)\\[\\],;\\-'])", "");
         System.out.println("Updated second sentence: " + firstSentence);
     }
 
