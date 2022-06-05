@@ -81,8 +81,8 @@ public class StringExpressionsSteps {
         System.out.println("The total wordcount is: " + stringHelper.countWords(inputText));
     }
 
-    @Given("case sensitivity is set to {booleanValue}")
-    public void case_sensitivity_is_set_to(Boolean bool) {
-        isCaseSensitive = bool;
-    }
+//    @Given("case sensitivity is set to {booleanValue}")
+//    public void case_sensitivity_is_set_to(Boolean bool) {
+//        isCaseSensitive = bool;
+//    }
 }
