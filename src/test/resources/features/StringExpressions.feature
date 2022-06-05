@@ -44,7 +44,7 @@ Feature: Comparing words, sentences and counting words.
       When _Second sentence is set to: "My sentence!?"
       Then check the equality of _First sentence and _Second sentence
 
-  Rule:
+  Rule: Counting words from a given paragraph
    @CountWords
    Scenario: 3. Count words
      Given the input is a paragraph of text

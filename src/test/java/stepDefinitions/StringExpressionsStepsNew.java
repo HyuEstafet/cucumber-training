@@ -1,11 +1,11 @@
 package stepDefinitions;
 
-import helpers.StringHelper;
 import helpers.StringHelperNew;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
+import static junit.framework.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class StringExpressionsStepsNew {
@@ -16,6 +16,9 @@ public class StringExpressionsStepsNew {
     private String secondInputWord;
     private String firstInputSentence;
     private String secondInputSentence;
+    String givenParagraph;
+    private int totalWordCount;
+    private int totalCharCount;
 
     @Given("case sensitivity is set to {booleanValue}")
     public void case_sensitivity_is_set_to(Boolean bool) {
@@ -59,4 +62,27 @@ public class StringExpressionsStepsNew {
         assertTrue(StringHelperNew.areSentencesEqual(firstInputSentence,secondInputSentence,isCaseSensitive),"Sentences are not matching and are not equal!");
     }
 
+    @Given("the input is a text paragraph")
+    public void the_input_is_a_text_paragraph(String docString) {
+        givenParagraph = docString;
+    }
+    @When("the word count is done")
+    public void the_word_count_is_done() {
+        totalWordCount = StringHelperNew.getWordsCountFromText(givenParagraph);
+        System.out.println("Total word count: " + totalWordCount);
+    }
+    @Then("the result is verified to equal {int} words")
+    public void the_result_is_verified(int numberOfWords) {
+        assertEquals("The total word count is not equal to the expected word count!",numberOfWords,totalWordCount);
+    }
+    @When("the char count is done")
+    public void the_char_count_is_done() {
+        totalCharCount = StringHelperNew.getCharsCount(givenParagraph);
+        System.out.println("Total char count: " + totalCharCount);
+    }
+    @Then("the result is verified to equal {int} chars")
+    public void the_result_is_verified_to_equal_chars(int numberOfChars) {
+        assertEquals("The total char count is not equal to the expected char count!",numberOfChars,totalCharCount);
+
+    }
 }
