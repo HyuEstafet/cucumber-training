@@ -10,11 +10,10 @@ import java.util.List;
 
 public class NumericExpressionsDataTableSteps {
 
-    private List<Integer> positiveNumbers = new ArrayList<>();
-    private List<Integer> negativeNumbers = new ArrayList<>();
-
-    int calculationOfPositives = 0;
-    int calculationOfNegatives = 0;
+    private final List<Integer> firstColumnNumbers = new ArrayList<>();
+    private final List<Integer> secondColumnNumbers = new ArrayList<>();
+    int calculationOfFirstColumnNumbers = 0;
+    int calculationOfSecondColumnNumbers = 0;
     String calculationType = "";
 
     @ParameterType("sum|difference")
@@ -25,13 +24,12 @@ public class NumericExpressionsDataTableSteps {
     @Given("we have the following numbers:")
     public void weHaveTheFollowingNumbers(List<List<Integer>> rows) {
         rows.forEach(column -> {
-            positiveNumbers.add(column.get(0)); // positive numbers (3, 2)
-            negativeNumbers.add(column.get(1)); // negative numbers (-1, -5)
+            firstColumnNumbers.add(column.get(0)); // first column numbers (3, 2)
+            secondColumnNumbers.add(column.get(1)); // second column numbers (-1, -5)
         });
 
-
-        System.out.println("Positive Numbers: " + positiveNumbers);
-        System.out.println("Negative Numbers: " + negativeNumbers);
+        System.out.println("Numbers from column one: " + firstColumnNumbers);
+        System.out.println("Numbers from column two: " + secondColumnNumbers);
     }
 
     @When("we use operator {operation}")
@@ -41,30 +39,30 @@ public class NumericExpressionsDataTableSteps {
         System.out.println("Setting calculation type to: " + calculationType);
 
         if (operation.equals("sum")) {
-            for (int n : positiveNumbers) {
-                calculationOfPositives = calculationOfPositives + n;
+            for (int n : firstColumnNumbers) {
+                calculationOfFirstColumnNumbers = calculationOfFirstColumnNumbers + n;
             }
-            negativeNumbers.forEach(number -> {
-                calculationOfNegatives = calculationOfNegatives + number;
+            secondColumnNumbers.forEach(number -> {
+                calculationOfSecondColumnNumbers = calculationOfSecondColumnNumbers + number;
             });
         } else {
-            for (int n : positiveNumbers) {
-                calculationOfPositives = calculationOfPositives - n;
+            for (int n : firstColumnNumbers) {
+                calculationOfFirstColumnNumbers = calculationOfFirstColumnNumbers - n;
             }
-            for (int n : negativeNumbers) {
-                calculationOfNegatives = calculationOfNegatives - n;
+            for (int n : secondColumnNumbers) {
+                calculationOfSecondColumnNumbers = calculationOfSecondColumnNumbers - n;
             }
         }
-        System.out.println("Positives calculations: " + calculationOfPositives);
-        System.out.println("Negatives calculations: " + calculationOfNegatives);
+        System.out.println("Column one calculations: " + calculationOfFirstColumnNumbers);
+        System.out.println("Column two calculations: " + calculationOfSecondColumnNumbers);
     }
 
 
     @Then("we print the results and compare")
     public void wePrintTheResults() {
         System.out.println(
-                calculationOfPositives == calculationOfNegatives ? "Calculations are equal!" :
-                        (calculationOfPositives > calculationOfNegatives ? "Calculation of positives is greater: " + calculationOfPositives :
-                                "Calculations of negatives is greater: " + calculationOfNegatives));
+                calculationOfFirstColumnNumbers == calculationOfSecondColumnNumbers ? "Calculations are equal!" :
+                        (calculationOfFirstColumnNumbers > calculationOfSecondColumnNumbers ? "Calculation of column one is greater: " + calculationOfFirstColumnNumbers :
+                                "Calculations of column two is greater: " + calculationOfSecondColumnNumbers));
     }
 }

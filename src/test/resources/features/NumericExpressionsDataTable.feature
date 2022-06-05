@@ -1,21 +1,21 @@
 # tests created by: Hyulya Gyuler
 @ParameterTypeAndDataTable
-Feature: Testing ParameterType and Data Table
+Feature: Testing ParameterType and Data Table calculations
 
-  Rule: Numbers are positive and negative
+  Rule: Calculations are done by columns and then compared
     @TestingSum
-    Scenario: Calculation for positive and negative numbers from a Data Table
+    Scenario: Sum of numbers by columns from a Data Table
       Given we have the following numbers:
-        | 3 | -1 |
-        | 2 | -5 |
+        | 3  | 2  |
+        | -1 | -5 |
       When we use operator sum
       Then we print the results and compare
 
     @TestingDifference
-    Scenario: Calculation for positive and negative numbers from a Data Table
+    Scenario: Difference of numbers by columns from a Data Table
       Given we have the following numbers:
-        | 3 | -1 |
-        | 2 | -5 |
+        | 3  | 2  |
+        | -1 | -5 |
       When we use operator difference
       Then we print the results and compare
 
