@@ -1,7 +1,6 @@
 package stepDefinitions;
 
 import helpers.StringHelper;
-import io.cucumber.java.ParameterType;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -9,7 +8,7 @@ import io.cucumber.java.en.When;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class StringExpressionsSteps {
+public class TestsTextExpressionsSteps {
 
     StringHelper stringHelper = new StringHelper();
     private String inputWord;
@@ -18,10 +17,10 @@ public class StringExpressionsSteps {
     private String secondSentence;
     String inputText;
 
-    @ParameterType(value = "true|True|TRUE|false|False|FALSE")
-    public Boolean booleanValue(String value) {
-        return Boolean.valueOf(value);
-    }
+//    @ParameterType(value = "true|True|TRUE|false|False|FALSE")
+//    public Boolean booleanValue(String value) {
+//        return Boolean.valueOf(value);
+//    }
 
     @Given("user inputs the word {word}")
     public void user_inputs_the_word(String inputString) {

@@ -5,9 +5,9 @@ Feature: Cucumber Text Expressions task
 
     Rule: Compare the two given words based on case sensitivity true or false
   Scenario: Compare two words
-    Given first input word is "Cucumber"
-    When second input word is "cucumber"
-    Then we verify "Cucumber" and "cucumber" are equal or not
+    Given first input word is Cucumber
+    When second input word is cucumber
+    Then we verify Cucumber and cucumber are equal or not
 
     Rule: Compare the two given sentences based on case sensitivity true or false
   Scenario: Compare two sentences

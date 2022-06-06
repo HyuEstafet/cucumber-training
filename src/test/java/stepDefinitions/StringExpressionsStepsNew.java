@@ -1,11 +1,12 @@
 package stepDefinitions;
 
 import helpers.StringHelperNew;
+import io.cucumber.java.ParameterType;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-import static junit.framework.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class StringExpressionsStepsNew {
@@ -19,6 +20,11 @@ public class StringExpressionsStepsNew {
     String givenParagraph;
     private int totalWordCount;
     private int totalCharCount;
+
+    @ParameterType(value = "true|True|TRUE|false|False|FALSE")
+    public Boolean booleanValue(String value) {
+        return Boolean.valueOf(value);
+    }
 
     @Given("case sensitivity is set to {booleanValue}")
     public void case_sensitivity_is_set_to(Boolean bool) {
@@ -73,7 +79,7 @@ public class StringExpressionsStepsNew {
     }
     @Then("the result is verified to equal {int} words")
     public void the_result_is_verified(int numberOfWords) {
-        assertEquals("The total word count is not equal to the expected word count!",numberOfWords,totalWordCount);
+        assertEquals(numberOfWords,totalWordCount,"The actual total word count is not equal to the expected word count!");
     }
     @When("the char count is done")
     public void the_char_count_is_done() {
@@ -82,7 +88,7 @@ public class StringExpressionsStepsNew {
     }
     @Then("the result is verified to equal {int} chars")
     public void the_result_is_verified_to_equal_chars(int numberOfChars) {
-        assertEquals("The total char count is not equal to the expected char count!",numberOfChars,totalCharCount);
+        assertEquals(numberOfChars,totalCharCount,"The actual total char count is not equal to the expected char count!");
 
     }
 }
