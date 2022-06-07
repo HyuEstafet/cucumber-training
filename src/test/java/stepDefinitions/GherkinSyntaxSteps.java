@@ -13,6 +13,8 @@ import java.util.Map;
 
 public class GherkinSyntaxSteps {
 
+    private List<String> studentsList;
+
     @Given("user is on the homepage")
     public void user_is_on_the_homepage() {
         System.out.println("The user is on the homepage");
@@ -131,20 +133,27 @@ public class GherkinSyntaxSteps {
         // Write code here that turns the phrase above into concrete actions
         throw new io.cucumber.java.PendingException();
     }
-    @Given("print the below students list")
-    public void we_have_the_below_students_list(DataTable table) {
-        List <String> data = table.asList();
-        System.out.println("List of students:");
-        System.out.println(data.get(0));
-        System.out.println(data.get(1));
-        System.out.println(data.get(2));
-        System.out.println(data.get(3));
-        System.out.println(data.get(4));
-    }
+//    @Given("print the below students list")
+//    public void we_have_the_below_students_list(DataTable table) {
+//        List <String> data = table.asList();
+//        System.out.println("List of students:");
+//        System.out.println(data.get(0));
+//        System.out.println(data.get(1));
+//        System.out.println(data.get(2));
+//        System.out.println(data.get(3));
+//        System.out.println(data.get(4));
+//    }
+        @Given("print the below students list")
+    public void we_have_the_below_students_list(List<String> studentsList) {
+        this.studentsList=studentsList;
+            System.out.println("All students: "+"\n" +this.studentsList);
+        }
+
 
     @Given("we have the below shopping data:")
     public void we_have_the_below_shopping_data(DataTable dataTable) {
-//
+        List <List<String>> shoppingData = dataTable.asLists();
+        System.out.println(shoppingData.get(0).get(0));
 
     }
 
